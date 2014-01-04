@@ -1,4 +1,4 @@
-Multithreaded Multiclient Java TFTP Server
+=== Multithreaded Multiclient Java TFTP Server ===
 
 At another point in time, I needed a TFTP server I could embed into some java software. I couldn't find one anywhere... at least, not one that worked, and had a reasonable license.
 

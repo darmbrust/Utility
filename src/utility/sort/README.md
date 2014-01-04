@@ -1,5 +1,5 @@
- Natural Sorting in Java
- =======
+=== Natural Sorting in Java ===
+
 
 A while ago, I had a need for more human friendly sorting within various software I maintain. Basically, what I wanted was a natural sort. One implementation that I found was the Alphanum algorithm, as discussed here: http://www.davekoelle.com/alphanum.html
 
