@@ -1,4 +1,4 @@
-=== Multithreaded Multiclient Java TFTP Server ===
+### Multithreaded Multiclient Java TFTP Server
 
 At another point in time, I needed a TFTP server I could embed into some java software. I couldn't find one anywhere... at least, not one that worked, and had a reasonable license.
 
@@ -16,5 +16,6 @@ Never mind the fact that their own TFTP client was horribly broken for years bec
 
 Note, I also have JUnit tests for this code - but I'll just point you at the apache test code for those.
 
-http://svn.apache.org/viewvc/commons/proper/net/trunk/src/test/java/org/apache/commons/net/tftp/TFTPServerPathTest.java?view=markup
-http://svn.apache.org/viewvc/commons/proper/net/trunk/src/test/java/org/apache/commons/net/tftp/TFTPTest.java?view=markup
+[Path Tests](http://svn.apache.org/viewvc/commons/proper/net/trunk/src/test/java/org/apache/commons/net/tftp/TFTPServerPathTest.java?view=markup)
+
+[Transfer Tests](http://svn.apache.org/viewvc/commons/proper/net/trunk/src/test/java/org/apache/commons/net/tftp/TFTPTest.java?view=markup)
