@@ -49,6 +49,8 @@ def main():
             subprocess.run("ls 20*.mp4 -1tr | head -n -14 | xargs -d '\n' rm -f --", shell=True)
 
         if previousTask != None:
+            #Give the new recorder time to get up and going, before stopping the old one
+            time.sleep(5)
             previousTask.stop()
             previousTask = None
 
@@ -95,13 +97,11 @@ class TaskManager:
                                      stderr=subprocess.PIPE,
                                      preexec_fn=os.setsid)
         self.pgid = os.getpgid(self.task.pid)
-        time.sleep(10)
         return self.task.poll() == None
 
     def stop(self):
-        print("Pgid: %s, pid: %s" % (self.pgid, self.task.pid))
         try:
-            print("Stopping task")
+            print("Stopping task " + str(self.task.pid))
             self.task.terminate()
             i = 0
             while (self.task.poll() == None and i < 50):
