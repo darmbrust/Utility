@@ -41,6 +41,7 @@ def main():
             sleepUntil += time.time() + 60
         else:
             #Started ok
+            print("Task " + str(task.pgid) + " started")
             nextAction = (datetime.date.today() + datetime.timedelta(days=1))
             nextAction = datetime.datetime.combine(
                 nextAction, datetime.time(hour=0, minute=0, second=0, microsecond=0))
