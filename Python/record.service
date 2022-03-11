@@ -1,0 +1,11 @@
+# File goes in /etc/systemd/system/record.service
+# chmod 664
+# systemctl daemon-reload
+# systemctl enable /etc/systemd/system/record.service
+
+[Unit]
+After=network.service
+[Service]
+ExecStart=/usr/bin/python3 /opt/CameraRecord/record.py
+[Install]
+WantedBy=default.target

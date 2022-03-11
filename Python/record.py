@@ -12,14 +12,15 @@ import os
 import signal
 import datetime
 
+STREAM_URL = "rtsp://username:password@ip:port/media/video1"
+OUTPUT_PATH = "/opt/CameraRecord/"
+
 
 def main():
     previousTask = None
     task = None
     sleepUntil = 0.0
     while not killer.kill_now:
-        print (time.time())
-        print (sleepUntil)
         while (time.time() < sleepUntil and not killer.kill_now):
             time.sleep(1)
             if task != None and task.taskAccess.poll() != None:
@@ -41,13 +42,12 @@ def main():
             sleepUntil += time.time() + 60
         else:
             #Started ok
-            print("Task " + str(task.pgid) + " started")
             nextAction = (datetime.date.today() + datetime.timedelta(days=1))
             nextAction = datetime.datetime.combine(
                 nextAction, datetime.time(hour=0, minute=0, second=0, microsecond=0))
             sleepUntil = nextAction.timestamp()
             #Remove any MP4 files older than 14 days
-            subprocess.run("ls 20*.mp4 -1tr | head -n -14 | xargs -d '\n' rm -f --", shell=True)
+            subprocess.run("ls " + OUTPUT_PATH + "20*.mp4 -1tr | head -n -14 | xargs -d '\n' rm -f --", shell=True)
 
         if previousTask != None:
             #Give the new recorder time to get up and going, before stopping the old one
@@ -92,8 +92,7 @@ class TaskManager:
         print("Starting recording " + str(datetime.datetime.now()))
         timeStamp = datetime.datetime.today().strftime('%Y-%m-%d-%H-%M-%S')
         self.task = subprocess.Popen(["mencoder", "-really-quiet", "-nocache", "-rtsp-stream-over-tcp",
-                                    "rtsp://view:viewview1!@192.168.10.27:554/media/video1", "-ovc", "copy",
-                                      "-o", timeStamp + ".mp4"],
+                                    STREAM_URL, "-ovc", "copy", "-o", OUTPUT_PATH + timeStamp + ".mp4"],
                                      stdout=subprocess.PIPE,
                                      stderr=subprocess.PIPE,
                                      preexec_fn=os.setsid)
